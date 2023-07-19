@@ -1,7 +1,7 @@
 import Modal from "components/Modal";
 import React, { useState } from "react";
 
-const ModalExample = ({
+export const ModalExample = ({
   isOpen,
   close,
 }: {
