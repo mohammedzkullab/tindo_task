@@ -1,37 +1,61 @@
 import { Button } from "components";
 import { Children } from "components/types";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 const Wrapper: React.FC<{
   children: Children;
-  open?: boolean;
   onClose: () => void;
-}> = ({ children, open = false, onClose }) => {
+  open?: boolean;
+  closeOnEsc?: boolean;
+  closeOnClickOutside?: boolean;
+}> = ({
+  children,
+  open = false,
+  onClose,
+  closeOnEsc = true,
+  closeOnClickOutside = true,
+}) => {
+  useEffect(() => {
+    const onKeyPress = (e: KeyboardEvent) => {
+      if (closeOnEsc && open && e.key === "Escape") onClose();
+    };
+
+    window.addEventListener("keydown", onKeyPress);
+    return () => window.removeEventListener("keydown", onKeyPress);
+  }, [closeOnEsc, onClose, open]);
+
+  const container = useRef<HTMLDivElement>(null);
+  const onOverlayClick = (e: React.MouseEvent) => {
+    if (!container.current?.contains(e.target as Node)) onClose();
+  };
   return (
     <>
-      {open ? (
+      <div
+        className={twMerge(
+          "fixed inset-0 z-50 p-8 text-white bg-gray-600/90 border border-red w-full h-full",
+          `${open ? "block" : "hidden"}`
+        )}
+        onClick={closeOnClickOutside ? onOverlayClick : undefined}
+      >
         <div
-          className={twMerge(
-            "fixed inset-0 z-10 p-8 text-white bg-gray-600/90",
-            `${open ? "block" : "hidden"}`
-          )}
+          className="relative w-full max-w-sm mx-auto mt-8 "
+          // onClick={(e) => e.stopPropagation()}
+          ref={container}
         >
-          <div className="relative w-full max-w-sm mx-auto mt-8">
-            <Button
-              className="absolute -top-2 -right-2 flex justify-center rounded-full h-8 w-8 bg-gray-600 cursor-pointer shadow-xl"
-              onClick={() => onClose()}
-              title="Cancel"
-            >
-              <span className="text-2xl leading-7 select-none">&times;</span>
-            </Button>
+          <Button
+            className="absolute -top-2 -right-2 flex justify-center rounded-full h-8 w-8 bg-gray-600 cursor-pointer shadow-xl py-0"
+            onClick={() => onClose()}
+            title="Cancel"
+          >
+            <span className="text-2xl leading-7 select-none">&times;</span>
+          </Button>
 
-            <div className="overflow-hidden bg-gray-800 rounded shadow-xl">
-              {children}
-            </div>
+          <div className="overflow-hidden bg-gray-800 rounded shadow-xl">
+            {children}
           </div>
         </div>
-      ) : null}
+      </div>
     </>
   );
 };
