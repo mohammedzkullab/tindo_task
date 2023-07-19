@@ -21,3 +21,14 @@ export interface ButtonProps extends HTMLProps<HTMLButtonElement> {
     ref?: React.Ref<HTMLButtonElement>;
     buttonLoadingProps?: ButtonLoadingPropsType;
 }
+
+
+/********/
+export interface Modal_Wrapper {
+    children: Children;
+    onClose: () => void;
+    open?: boolean;
+    closeOnEsc?: boolean;
+    closeOnClickOutside?: boolean;
+    className?: string;
+}

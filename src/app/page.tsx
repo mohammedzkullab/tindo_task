@@ -10,8 +10,8 @@ export default function Home() {
     setOpen(false);
   };
   return (
-    <main className={styles.main}>
-      <Button onClick={() => setOpen((prev) => !prev)}>Show Modal</Button>
+    <main>
+      <Button onClick={() => setOpen(true)}>Show Modal</Button>
       <ModalExample isOpen={isOpen} close={closeModal} />
     </main>
   );

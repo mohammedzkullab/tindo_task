@@ -1,37 +1,55 @@
 import { Button } from "components";
-import { Children } from "components/types";
-import React from "react";
+import { Children, Modal_Wrapper } from "components/types";
+import ReactDOM from "react-dom";
 import { twMerge } from "tailwind-merge";
+import { useModalClose } from "./useModalClose";
 
-const Wrapper: React.FC<{
-  children: Children;
-  open?: boolean;
-  onClose: () => void;
-}> = ({ children, open = false, onClose }) => {
+const Wrapper: React.FC<Modal_Wrapper> = ({
+  children,
+  open = false,
+  onClose,
+  closeOnEsc = true,
+  closeOnClickOutside = true,
+  className,
+}) => {
+  const { onOverlayClick, container, portal } = useModalClose(
+    closeOnEsc,
+    open,
+    onClose
+  );
+
   return (
     <>
-      {open ? (
+      {ReactDOM.createPortal(
         <div
           className={twMerge(
-            "fixed inset-0 z-10 p-8 text-white bg-gray-600/90",
-            `${open ? "block" : "hidden"}`
+            "transition-all",
+            "fixed inset-0 z-50 p-8 text-white bg-gray-600/90 border border-red w-full h-full",
+            `${open ? "block" : "hidden"}`,
+            className
           )}
+          onClick={closeOnClickOutside ? onOverlayClick : undefined}
         >
-          <div className="relative w-full max-w-sm mx-auto mt-8">
+          <div
+            className="relative w-full max-w-lg mx-auto mt-8 transition duration-300 ease-in-out "
+            // onClick={(e) => e.stopPropagation()}
+            ref={container}
+          >
             <Button
-              className="absolute -top-2 -right-2 flex justify-center rounded-full h-8 w-8 bg-gray-600 cursor-pointer shadow-xl"
+              className="absolute -top-2 -right-2 flex justify-center rounded-full h-8 w-8 bg-blue-100 text-gray-800 cursor-pointer shadow-xl py-0"
               onClick={() => onClose()}
               title="Cancel"
             >
               <span className="text-2xl leading-7 select-none">&times;</span>
             </Button>
 
-            <div className="overflow-hidden bg-gray-800 rounded shadow-xl">
+            <div className="overflow-hidden bg-gray-500 rounded shadow-xl">
               {children}
             </div>
           </div>
-        </div>
-      ) : null}
+        </div>,
+        portal.current
+      )}
     </>
   );
 };
@@ -46,9 +64,10 @@ const Body: React.FC<{ children: Children }> = ({ children }) => (
   <div className="p-4">{children}</div>
 );
 
-const Footer: React.FC<{ children: Children }> = ({ children }) => (
-  <div className="p-4">{children}</div>
-);
+const Footer: React.FC<{ children: Children; className?: string }> = ({
+  children,
+  className,
+}) => <div className={twMerge("p-3 bg-gray-800", className)}>{children}</div>;
 
 const Modal = { Wrapper, Head, Body, Footer };
 
