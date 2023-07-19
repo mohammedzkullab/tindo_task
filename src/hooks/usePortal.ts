@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react'
 
-const usePortal = () => {
-    const portal = useRef(document.createElement("div"));
+export const usePortal = () => {
+    const customDiv = document.createElement("div")
+    const portal = useRef(customDiv);
 
     useEffect(() => {
         const current = portal.current;
@@ -11,5 +12,3 @@ const usePortal = () => {
 
     return portal;
 }
-
-export default usePortal
