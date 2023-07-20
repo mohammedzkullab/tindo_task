@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "components";
 import { Children, Modal_Wrapper } from "components/types";
 import ReactDOM from "react-dom";
@@ -36,7 +37,7 @@ const Wrapper: React.FC<Modal_Wrapper> = ({
             ref={container}
           >
             <Button
-              className="absolute -top-2 -right-2 flex justify-center rounded-full h-8 w-8 bg-blue-100 text-gray-800 cursor-pointer shadow-xl py-0"
+              className="absolute flex justify-center w-8 h-8 py-0 text-gray-800 bg-blue-100 rounded-full shadow-xl cursor-pointer -top-2 -right-2"
               onClick={() => onClose()}
               title="Cancel"
             >
