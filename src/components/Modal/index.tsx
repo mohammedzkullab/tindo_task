@@ -55,15 +55,19 @@ const Wrapper: React.FC<Modal_Wrapper> = ({
   );
 };
 
-const Head: React.FC<{ children: Children }> = ({ children }) => (
-  <div className="block p-4 bg-gray-900">
+const Head: React.FC<{ children: Children; className?: string }> = ({
+  children,
+  className,
+}) => (
+  <div className={twMerge("block p-4 bg-gray-900", className)}>
     <h1 className="text-lg">{children}</h1>
   </div>
 );
 
-const Body: React.FC<{ children: Children }> = ({ children }) => (
-  <div className="p-4">{children}</div>
-);
+const Body: React.FC<{ children: Children; className?: string }> = ({
+  children,
+  className,
+}) => <div className={twMerge("p-4", className)}>{children}</div>;
 
 const Footer: React.FC<{ children: Children; className?: string }> = ({
   children,
