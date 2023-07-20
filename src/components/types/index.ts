@@ -32,3 +32,22 @@ export interface Modal_Wrapper {
     closeOnClickOutside?: boolean;
     className?: string;
 }
+
+/*******/
+export interface MainLayoutProps extends HTMLProps<HTMLDivElement> {
+    children: Children;
+    title: string;
+    pageDescription?: string;
+    withoutNavbar?: boolean;
+    contentClassName?: string;
+    withoutFooter?: boolean;
+}
+export type MainLayoutType = React.FC<MainLayoutProps>;
+
+/*******/
+export type ChildrenProp = {
+    children: ReactNode;
+};
+export interface NoSsrProps extends ChildrenProp { }
+
+export type NoSsrType = React.FC<NoSsrProps>;

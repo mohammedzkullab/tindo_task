@@ -1,8 +1,7 @@
-"use client";
 import { useState } from "react";
-import styles from "./page.module.css";
 import { Button } from "components";
 import ModalExample from "components/Modal_example";
+import NoSsr from "components/NoSsr";
 
 export default function Home() {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -10,9 +9,9 @@ export default function Home() {
     setOpen(false);
   };
   return (
-    <main>
+    <NoSsr>
       <Button onClick={() => setOpen(true)}>Show Modal</Button>
       <ModalExample isOpen={isOpen} close={closeModal} />
-    </main>
+    </NoSsr>
   );
 }
