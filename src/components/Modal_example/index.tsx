@@ -1,6 +1,5 @@
 import Button from "components/Button";
 import Modal from "components/Modal";
-import React, { useState } from "react";
 
 export const ModalExample = ({
   isOpen,
@@ -12,7 +11,7 @@ export const ModalExample = ({
   return (
     <Modal.Wrapper open={isOpen} onClose={close}>
       <Modal.Head>Example Modal </Modal.Head>
-      <Modal.Body>
+      <Modal.Body className="p-5">
         Dolore ipsum quis mollit esse tempor. Proident ut tempor quis ipsum non
         veniam mollit consectetur sunt ipsum eu. Ullamco consequat dolor
         voluptate adipisicing non laborum cupidatat cillum esse. Ut anim nisi
