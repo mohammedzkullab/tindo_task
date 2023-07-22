@@ -3,7 +3,7 @@ import Modal from "components/Modal";
 import NoSsr from "components/NoSsr";
 import { useState } from "react";
 
-export const ModalExample = ({
+export const ModalExampleWithForm = ({
   initOpen,
   withoutFooter,
 }: {
@@ -17,17 +17,31 @@ export const ModalExample = ({
   return (
     <NoSsr>
       <Button className="border border-white" onClick={() => setOpen(true)}>
-        Show Modal
+        Show Modal example with Form
       </Button>
       <Modal.Wrapper open={isOpen} onClose={closeModal} size="large">
-        <Modal.Head>Example Modal </Modal.Head>
+        <Modal.Head>Example Modal With Form</Modal.Head>
         <Modal.Body className="p-5">
-          Dolore ipsum quis mollit esse tempor. Proident ut tempor quis ipsum
-          non veniam mollit consectetur sunt ipsum eu. Ullamco consequat dolor
-          voluptate adipisicing non laborum cupidatat cillum esse. Ut anim nisi
-          dolor do nisi aute aliquip fugiat. Qui pariatur pariatur consequat
-          exercitation laboris proident irure quis anim culpa do reprehenderit
-          ad nisi.{" "}
+          <form>
+            <div className="flex flex-col gap-4">
+              <label htmlFor="name" className="mt-2">
+                Name
+              </label>
+              <input type="text" id="name" className="form-control_input" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email">Email</label>
+              <input type="text" id="email" className="form-control_input" />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                className="form-control_input"
+              />
+            </div>
+          </form>
         </Modal.Body>
         {!withoutFooter && (
           <Modal.Footer className="flex items-center justify-end gap-4">
@@ -42,8 +56,9 @@ export const ModalExample = ({
               className="bg-transparent border-[0.5px] border-white"
               onClick={() => alert("You saved me !")}
               buttonSize="small"
+              type="submit"
             >
-              Save
+              Submit
             </Button>
           </Modal.Footer>
         )}
@@ -52,4 +67,4 @@ export const ModalExample = ({
   );
 };
 
-export default ModalExample;
+export default ModalExampleWithForm;

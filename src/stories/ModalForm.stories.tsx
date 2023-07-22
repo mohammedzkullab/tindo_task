@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { ModalExample } from "../components/Modal_example";
+import ModalExampleWithForm from "components/ModalExampleWithForm";
 
 const meta: Meta<typeof ModalExample> = {
-  title: "Components/ModalExample_text",
-  component: ModalExample,
+  title: "Components/ModalExample_form",
+  component: ModalExampleWithForm,
   parameters: {
     actions: { argTypesRegex: "^on.*" },
   },
@@ -22,12 +23,5 @@ export const OpenModal: Story = {
 export const ClosedModal: Story = {
   args: {
     initOpen: false,
-  },
-};
-
-export const WithoutFooter: Story = {
-  args: {
-    initOpen: true,
-    withoutFooter: true,
   },
 };
