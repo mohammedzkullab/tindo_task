@@ -1,17 +1,14 @@
-import { useState } from "react";
-import { Button } from "components";
-import ModalExample from "components/Modal_example";
+import { ModalExample } from "components";
+import ModalExampleWithForm from "components/ModalExampleWithForm";
 import NoSsr from "components/NoSsr";
 
 export default function Home() {
-  const [isOpen, setOpen] = useState<boolean>(false);
-  const closeModal = () => {
-    setOpen(false);
-  };
   return (
     <NoSsr>
-      <Button onClick={() => setOpen(true)}>Show Modal</Button>
-      <ModalExample isOpen={isOpen} close={closeModal} />
+      <div className="flex flex-col items-center justify-center h-full gap-5">
+        <ModalExample />
+        <ModalExampleWithForm />
+      </div>
     </NoSsr>
   );
 }

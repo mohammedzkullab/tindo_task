@@ -24,6 +24,7 @@ export interface ButtonProps extends HTMLProps<HTMLButtonElement> {
 
 
 /********/
+type ModalSize = "small" | "medium" | "large"
 export interface Modal_Wrapper {
     children: Children;
     onClose: () => void;
@@ -31,6 +32,7 @@ export interface Modal_Wrapper {
     closeOnEsc?: boolean;
     closeOnClickOutside?: boolean;
     className?: string;
+    size?: ModalSize
 }
 
 /*******/

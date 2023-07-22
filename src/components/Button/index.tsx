@@ -17,7 +17,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const classNames = useMemo(() => {
-      let buttonClassName = `block bg-blue-light hover:bg-opacity-95 transition-colors text-white rounded-md disabled:opacity-50 disabled:hover:bg-blue-light ${
+      let buttonClassName = `block bg-zinc-900 hover:bg-opacity-95 hover:scale-95 hover:bg-zinc-800 transition-all text-white rounded-md disabled:opacity-50 disabled:hover:bg-blue-light ${
         className ?? ""
       }`;
 

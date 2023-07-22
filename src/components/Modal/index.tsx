@@ -12,6 +12,7 @@ const Wrapper: React.FC<Modal_Wrapper> = ({
   closeOnEsc = true,
   closeOnClickOutside = true,
   className,
+  size = "small",
 }) => {
   const [mounted, setMounted] = useState(false);
 
@@ -22,34 +23,55 @@ const Wrapper: React.FC<Modal_Wrapper> = ({
     open,
     onClose
   );
+  const sizes = (size?: string) => {
+    switch (size) {
+      case "small":
+        return "max-w-sm";
+      case "medium":
+        return "max-w-lg";
+      case "large":
+        return "max-w-2xl";
+      default:
+        return "max-w-lg";
+    }
+  };
+  const classes = twMerge(
+    "transition-all",
+    "fixed inset-0 z-50 p-8 text-white bg-gray-600/90 border border-red w-full h-full",
+    `${open ? "block" : "hidden"}`,
+    className
+  );
 
   return (
     <>
       {mounted ? (
         ReactDOM.createPortal(
           <div
-            className={twMerge(
-              "transition-all",
-              "fixed inset-0 z-50 p-8 text-white bg-gray-600/90 border border-red w-full h-full",
-              `${open ? "block" : "hidden"}`,
-              className
-            )}
+            className={classes}
             onClick={closeOnClickOutside ? onOverlayClick : undefined}
           >
             <div
-              className="relative w-full max-w-lg mx-auto mt-8 transition duration-300 ease-in-out "
+              className={twMerge(
+                "relative w-full  mx-auto mt-8 transition duration-300 ease-in-out ",
+                sizes(size)
+              )}
               // onClick={(e) => e.stopPropagation()}
               ref={container}
             >
               <Button
-                className="absolute flex justify-center w-8 h-8 py-0 text-gray-800 bg-blue-100 rounded-full shadow-xl cursor-pointer -top-2 -right-2"
+                className="absolute flex justify-center w-8 h-8 py-0 text-gray-800 bg-blue-100 rounded-full shadow-xl cursor-pointer hover:bg-blue-50 -top-2 -right-2"
                 onClick={() => onClose()}
                 title="Cancel"
               >
                 <span className="text-2xl leading-7 select-none">&times;</span>
               </Button>
 
-              <div className="overflow-hidden bg-gray-500 rounded shadow-xl">
+              <div
+                className={twMerge(
+                  "overflow-hidden bg-gray-500 rounded shadow-xl",
+                  sizes(size)
+                )}
+              >
                 {children}
               </div>
             </div>
