@@ -62,4 +62,4 @@ You can access them through dot annotation , "eg. `Modal.component`"
 | resource  | link  |
 |---|---|
 |  Live preview  | [https://tindo-task-five.vercel.app](https://tindo-task-five.vercel.app)   |
-|  Storybook  | [Coming soon](https://tindo-task-five.vercel.app)   |
+|  Storybook  | [https://mohammedzkullab.github.io/tindo_task/?path=/story/components-button--primary]((https://mohammedzkullab.github.io/tindo_task/?path=/story/components-button--primary)https://tindo-task-five.vercel.app)   |
